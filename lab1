@@ -1,0 +1,172 @@
+ show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+test    0.000GB
+> use test
+switched to db test
+> 
+> drop test
+2021-04-07T09:38:37.737+0530 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:5
+> drop test
+2021-04-07T09:38:54.904+0530 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:5
+> db.droptest()
+2021-04-07T09:39:47.964+0530 E QUERY    [thread1] TypeError: db.droptest is not a function :
+@(shell):1:1
+> db.droptest
+test.droptest
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+test    0.000GB
+> db.dropDatabase()
+{ "dropped" : "test", "ok" : 1 }
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db.createCollection("emp")
+{ "ok" : 1 }
+> db.emp.insert([{id:1
+... fname:"josh"
+... lname:"sai"
+... email:"josh@gmail.com"
+... age:26
+... phno:6303685535
+... experience:5}])
+2021-04-07T09:56:22.289+0530 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):2:0
+> db.emp.insert({id:1 fname:"josh" lname:"sai" email:"josh@gmail.com" age:26 phno:6303685535 experience:5})
+2021-04-07T09:56:47.785+0530 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):1:20
+> db.emp.insert({id:1, fname:"josh", lname:"sai", email:"josh@gmail.com", age:26, phno:6303685535, experience:5})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()pretty()
+2021-04-07T09:57:55.829+0530 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:13
+> db.emp.find().pretty()
+{
+	"_id" : ObjectId("606d34b149558b1d660d8cc3"),
+	"id" : 1,
+	"fname" : "josh",
+	"lname" : "sai",
+	"email" : "josh@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+> db.emp.insert({id:1, fname:"smith", lname:"cole", email:"smithc@gmail.com", age:22, phno:2303685535, experience:5})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find().pretty()
+{
+	"_id" : ObjectId("606d34b149558b1d660d8cc3"),
+	"id" : 1,
+	"fname" : "josh",
+	"lname" : "sai",
+	"email" : "josh@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+{
+	"_id" : ObjectId("606d353749558b1d660d8cc4"),
+	"id" : 1,
+	"fname" : "smith",
+	"lname" : "cole",
+	"email" : "smithc@gmail.com",
+	"age" : 22,
+	"phno" : 2303685535,
+	"experience" : 5
+}
+> db.emp.insert({id:1, fname:"appy", lname:"hadid", email:"appy@gmail.com", age:22, phno:2303684535, experience:6})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({id:1, fname:"zayn", lname:"malik", email:"mailkz@gmail.com", age:28, phno:2783684535, experience:7})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({id:1, fname:"harry", lname:"styles", email:"sharry@gmail.com", age:28, phno:2783794535, experience:4})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find().pretty()
+{
+	"_id" : ObjectId("606d34b149558b1d660d8cc3"),
+	"id" : 1,
+	"fname" : "josh",
+	"lname" : "sai",
+	"email" : "josh@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+{
+	"_id" : ObjectId("606d353749558b1d660d8cc4"),
+	"id" : 1,
+	"fname" : "smith",
+	"lname" : "cole",
+	"email" : "smithc@gmail.com",
+	"age" : 22,
+	"phno" : 2303685535,
+	"experience" : 5
+}
+{
+	"_id" : ObjectId("606d357849558b1d660d8cc5"),
+	"id" : 1,
+	"fname" : "appy",
+	"lname" : "hadid",
+	"email" : "appy@gmail.com",
+	"age" : 22,
+	"phno" : 2303684535,
+	"experience" : 6
+}
+{
+	"_id" : ObjectId("606d35a549558b1d660d8cc6"),
+	"id" : 1,
+	"fname" : "zayn",
+	"lname" : "malik",
+	"email" : "mailkz@gmail.com",
+	"age" : 28,
+	"phno" : 2783684535,
+	"experience" : 7
+}
+{
+	"_id" : ObjectId("606d360249558b1d660d8cc7"),
+	"id" : 1,
+	"fname" : "harry",
+	"lname" : "styles",
+	"email" : "sharry@gmail.com",
+	"age" : 28,
+	"phno" : 2783794535,
+	"experience" : 4
+}
+ db.emp.find({fname:"appy"}).pretty()
+{
+	"_id" : ObjectId("606d357849558b1d660d8cc5"),
+	"id" : 1,
+	"fname" : "appy",
+	"lname" : "hadid",
+	"email" : "appy@gmail.com",
+	"age" : 22,
+	"phno" : 2303684535,
+	"experience" : 6
+}
+> db.emp.find({experience:5}).pretty()
+{
+	"_id" : ObjectId("606d34b149558b1d660d8cc3"),
+	"id" : 1,
+	"fname" : "josh",
+	"lname" : "sai",
+	"email" : "josh@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+{
+	"_id" : ObjectId("606d353749558b1d660d8cc4"),
+	"id" : 1,
+	"fname" : "smith",
+	"lname" : "cole",
+	"email" : "smithc@gmail.com",
+	"age" : 22,
+	"phno" : 2303685535,
+	"experience" : 5
+}
+> ^C
+bye
+apoorva@apoorva:~$ 
+
+
