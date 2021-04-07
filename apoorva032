@@ -1,0 +1,72 @@
+> use cust
+switched to db cust
+> db.createCollection("custd")
+{ "ok" : 1 }
+> db.custd.insert({cust_id:"a123",amount:500,status:"a"})
+WriteResult({ "nInserted" : 1 })
+> db.custd.insert({cust_id:"a123",amount:250,status:"a"})
+WriteResult({ "nInserted" : 1 })
+> db.custd.insert({cust_id:"b212",amount:200,status:"a"})
+WriteResult({ "nInserted" : 1 })
+> db.custd.insert({cust_id:"a123",amount:300,status:"d"})
+WriteResult({ "nInserted" : 1 })
+> db.custd.find().pretty()
+{
+	"_id" : ObjectId("606d582ed8b51d9407a6d0c8"),
+	"cust_id" : "a123",
+	"amount" : 500,
+	"status" : "a"
+}
+{
+	"_id" : ObjectId("606d584ad8b51d9407a6d0c9"),
+	"cust_id" : "a123",
+	"amount" : 250,
+	"status" : "a"
+}
+{
+	"_id" : ObjectId("606d5861d8b51d9407a6d0ca"),
+	"cust_id" : "b212",
+	"amount" : 200,
+	"status" : "a"
+}
+{
+	"_id" : ObjectId("606d588dd8b51d9407a6d0cb"),
+	"cust_id" : "a123",
+	"amount" : 300,
+	"status" : "d"
+}
+
+Q1)RETRIEVE ALL CUSTOMERS WHOSE ACCOUNT IS ACTIVE(A)
+> db.custd.find({status:"a"}).pretty()
+{
+	"_id" : ObjectId("606d582ed8b51d9407a6d0c8"),
+	"cust_id" : "a123",
+	"amount" : 500,
+	"status" : "a"
+}
+{
+	"_id" : ObjectId("606d584ad8b51d9407a6d0c9"),
+	"cust_id" : "a123",
+	"amount" : 250,
+	"status" : "a"
+}
+{
+	"_id" : ObjectId("606d5861d8b51d9407a6d0ca"),
+	"cust_id" : "b212",
+	"amount" : 200,
+	"status" : "a"
+}
+
+Q2)RETRIEVE THE CUSTOMERS WHO HAS MAXIMUM AMOUNT IN ACCOUNT.
+> db.custd.aggregate([{$group:{_id:"$cust_id",value:{$sum:"$amount"}}},{$out:"show"}])
+> 
+> db.show.find()
+
+{ "_id" : "a123", "value" : 500 }
+> 
+
+Q3)FOR EACH CUSTOMER COUNT THE NO OF ACCOUNT STATUS.
+> db.custd.aggregate([{$match:{status:"a"}},{$group:{_id:"$cust_id",value:{$sum:1}}}])
+{ "_id" : "b212", "value" : 1 }
+{ "_id" : "a123", "value" : 2 }
+
