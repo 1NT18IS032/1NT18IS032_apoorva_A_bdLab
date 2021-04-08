@@ -1,0 +1,414 @@
+Lab 1
+
+Date: 24 March 2021
+
+> use company
+switched to db company
+
+>db.createCollection("empd")
+> db.emp.insertMany([{_id:1, fname:"appy" , lname:"shetty", age:22, email:"appy9972@gmail.com", phone:"9380558789", exp:3}])
+{ "acknowledged" : true, "insertedIds" : [ 1 ] }
+> db.emp.insertMany([{_id:2, fname:"spoo" , lname:"singa", age:24, email:"ssinga@gmail.com", phone:"9380558239", exp:4}])
+{ "acknowledged" : true, "insertedIds" : [ 2 ] }
+> db.empd.insertMany([{_id:3, fname:"divya", lname:"sajjan", email:"sajjan@gmail.com", age:26 ,phno:6303685535, experience:5}])
+{ "acknowledged" : true, "insertedIds" : [ 3 ] }
+> db.empd.insertMany([{_id:4, fname:"gaurav", lname:"mishra", email:"gmishra@gmail.com", age:26 ,phno:6303685835, experience:6}])
+{ "acknowledged" : true, "insertedIds" : [ 4 ] }
+> db.empd.insertMany([{_id:5, fname:"aish", lname:"chapte", email:"aishc@gmail.com", age:25 ,phno:9303685835, experience:7}])
+{ "acknowledged" : true, "insertedIds" : [ 5 ] }
+> db.empd.insertMany([{_id:6, fname:"sid", lname:"surya", email:"sursid@gmail.com", age:24 ,phno:8793685835, experience:4}])
+{ "acknowledged" : true, "insertedIds" : [ 6 ] }
+> db.empd.insertMany([{_id:7, fname:"aryan", lname:"jain", email:"jaina@gmail.com", age:22 ,phno:1233685835, experience:3}])
+{ "acknowledged" : true, "insertedIds" : [ 7 ] }
+> db.empd.insertMany([{_id:8, fname:"arihant", lname:"kochar", email:"kochara@gmail.com", age:25 ,phno:1233685456, experience:2}])
+{ "acknowledged" : true, "insertedIds" : [ 8 ] }
+> db.empd.insertMany([{_id:9, fname:"vivek", lname:"kumar", email:"vivuk@gmail.com", age:23 ,phno:1233105456, experience:3}])
+{ "acknowledged" : true, "insertedIds" : [ 9 ] }
+> db.empd.insertMany([{_id:10, fname:"abhi", lname:"kumar", email:"abhik@gmail.com", age:25 ,phno:1233107766, experience:4}])
+{ "acknowledged" : true, "insertedIds" : [ 10 ] }
+> db.empd.insertMany([{_id:2, fname:"spoo" , lname:"singa", age:24, email:"ssinga@gmail.com", phone:"9380558239", exp:4}])
+{ "acknowledged" : true, "insertedIds" : [ 2 ] }
+
+> db.empd.find().pretty()
+{
+	"_id" : 1,
+	"fname" : "apoorva",
+	"lname" : "shetty",
+	"age" : 21,
+	"email" : "appy@gmail.com",
+	"phone" : "9380558899",
+	"exp" : 3
+}
+{
+	"_id" : 3,
+	"fname" : "divya",
+	"lname" : "sajjan",
+	"email" : "sajjan@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+{
+	"_id" : 4,
+	"fname" : "gaurav",
+	"lname" : "mishra",
+	"email" : "gmishra@gmail.com",
+	"age" : 26,
+	"phno" : 6303685835,
+	"experience" : 6
+}
+{
+	"_id" : 5,
+	"fname" : "aish",
+	"lname" : "chapte",
+	"email" : "aishc@gmail.com",
+	"age" : 25,
+	"phno" : 9303685835,
+	"experience" : 7
+}
+{
+	"_id" : 6,
+	"fname" : "sid",
+	"lname" : "surya",
+	"email" : "sursid@gmail.com",
+	"age" : 24,
+	"phno" : 8793685835,
+	"experience" : 4
+}
+{
+	"_id" : 7,
+	"fname" : "aryan",
+	"lname" : "jain",
+	"email" : "jaina@gmail.com",
+	"age" : 22,
+	"phno" : 1233685835,
+	"experience" : 3
+}
+{
+	"_id" : 8,
+	"fname" : "arihant",
+	"lname" : "kochar",
+	"email" : "kochara@gmail.com",
+	"age" : 25,
+	"phno" : 1233685456,
+	"experience" : 2
+}
+{
+	"_id" : 9,
+	"fname" : "vivek",
+	"lname" : "kumar",
+	"email" : "vivuk@gmail.com",
+	"age" : 23,
+	"phno" : 1233105456,
+	"experience" : 3
+}
+{
+	"_id" : 10,
+	"fname" : "abhi",
+	"lname" : "kumar",
+	"email" : "abhik@gmail.com",
+	"age" : 25,
+	"phno" : 1233107766,
+	"experience" : 4
+}
+{
+	"_id" : 2,
+	"fname" : "spoo",
+	"lname" : "singa",
+	"age" : 24,
+	"email" : "ssinga@gmail.com",
+	"phone" : "9380558239",
+	"exp" : 4
+}
+
+> db.empd.find({fname:"apoorva"}).pretty()
+{
+	"_id" : 1,
+	"fname" : "apoorva",
+	"lname" : "shetty",
+	"age" : 21,
+	"email" : "appy@gmail.com",
+	"phone" : "9380558899",
+	"exp" : 3
+}
+
+> db.empd.find({$and: [{lname:"singa"},{exp:4}]}).pretty()
+{
+	"_id" : 2,
+	"fname" : "spoo",
+	"lname" : "singa",
+	"age" : 24,
+	"email" : "ssinga@gmail.com",
+	"phone" : "9380558239",
+	"exp" : 4
+}
+
+> db.empd.find({age: {$not: {$gt:24}}}).pretty()
+{
+	"_id" : 1,
+	"fname" : "apoorva",
+	"lname" : "shetty",
+	"age" : 21,
+	"email" : "appy@gmail.com",
+	"phone" : "9380558899",
+	"exp" : 3
+}
+{
+	"_id" : 6,
+	"fname" : "sid",
+	"lname" : "surya",
+	"email" : "sursid@gmail.com",
+	"age" : 24,
+	"phno" : 8793685835,
+	"experience" : 4
+}
+{
+	"_id" : 7,
+	"fname" : "aryan",
+	"lname" : "jain",
+	"email" : "jaina@gmail.com",
+	"age" : 22,
+	"phno" : 1233685835,
+	"experience" : 3
+}
+{
+	"_id" : 9,
+	"fname" : "vivek",
+	"lname" : "kumar",
+	"email" : "vivuk@gmail.com",
+	"age" : 23,
+	"phno" : 1233105456,
+	"experience" : 3
+}
+{
+	"_id" : 2,
+	"fname" : "spoo",
+	"lname" : "singa",
+	"age" : 24,
+	"email" : "ssinga@gmail.com",
+	"phone" : "9380558239",
+	"exp" : 4
+}
+> db.empd.find({age: {$ne:20}}).pretty()
+{
+	"_id" : 1,
+	"fname" : "apoorva",
+	"lname" : "shetty",
+	"age" : 21,
+	"email" : "appy@gmail.com",
+	"phone" : "9380558899",
+	"exp" : 3
+}
+{
+	"_id" : 3,
+	"fname" : "divya",
+	"lname" : "sajjan",
+	"email" : "sajjan@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+{
+	"_id" : 4,
+	"fname" : "gaurav",
+	"lname" : "mishra",
+	"email" : "gmishra@gmail.com",
+	"age" : 26,
+	"phno" : 6303685835,
+	"experience" : 6
+}
+{
+	"_id" : 5,
+	"fname" : "aish",
+	"lname" : "chapte",
+	"email" : "aishc@gmail.com",
+	"age" : 25,
+	"phno" : 9303685835,
+	"experience" : 7
+}
+{
+	"_id" : 6,
+	"fname" : "sid",
+	"lname" : "surya",
+	"email" : "sursid@gmail.com",
+	"age" : 24,
+	"phno" : 8793685835,
+	"experience" : 4
+}
+{
+	"_id" : 7,
+	"fname" : "aryan",
+	"lname" : "jain",
+	"email" : "jaina@gmail.com",
+	"age" : 22,
+	"phno" : 1233685835,
+	"experience" : 3
+}
+{
+	"_id" : 8,
+	"fname" : "arihant",
+	"lname" : "kochar",
+	"email" : "kochara@gmail.com",
+	"age" : 25,
+	"phno" : 1233685456,
+	"experience" : 2
+}
+{
+	"_id" : 9,
+	"fname" : "vivek",
+	"lname" : "kumar",
+	"email" : "vivuk@gmail.com",
+	"age" : 23,
+	"phno" : 1233105456,
+	"experience" : 3
+}
+{
+	"_id" : 10,
+	"fname" : "abhi",
+	"lname" : "kumar",
+	"email" : "abhik@gmail.com",
+	"age" : 25,
+	"phno" : 1233107766,
+	"experience" : 4
+}
+{
+	"_id" : 2,
+	"fname" : "spoo",
+	"lname" : "singa",
+	"age" : 24,
+	"email" : "ssinga@gmail.com",
+	"phone" : "9380558239",
+	"exp" : 4
+}
+
+> db.empd.find({age: {$lte:24}}).pretty()
+{
+	"_id" : 1,
+	"fname" : "apoorva",
+	"lname" : "shetty",
+	"age" : 21,
+	"email" : "appy@gmail.com",
+	"phone" : "9380558899",
+	"exp" : 3
+}
+{
+	"_id" : 6,
+	"fname" : "sid",
+	"lname" : "surya",
+	"email" : "sursid@gmail.com",
+	"age" : 24,
+	"phno" : 8793685835,
+	"experience" : 4
+}
+{
+	"_id" : 7,
+	"fname" : "aryan",
+	"lname" : "jain",
+	"email" : "jaina@gmail.com",
+	"age" : 22,
+	"phno" : 1233685835,
+	"experience" : 3
+}
+{
+	"_id" : 9,
+	"fname" : "vivek",
+	"lname" : "kumar",
+	"email" : "vivuk@gmail.com",
+	"age" : 23,
+	"phno" : 1233105456,
+	"experience" : 3
+}
+{
+	"_id" : 2,
+	"fname" : "spoo",
+	"lname" : "singa",
+	"age" : 24,
+	"email" : "ssinga@gmail.com",
+	"phone" : "9380558239",
+	"exp" : 4
+}
+> db.empd.find({_id: {$ne:1}}).pretty()
+{
+	"_id" : 2,
+	"fname" : "spoo",
+	"lname" : "singa",
+	"age" : 24,
+	"email" : "ssinga@gmail.com",
+	"phone" : "9380558239",
+	"exp" : 4
+}
+{
+	"_id" : 3,
+	"fname" : "divya",
+	"lname" : "sajjan",
+	"email" : "sajjan@gmail.com",
+	"age" : 26,
+	"phno" : 6303685535,
+	"experience" : 5
+}
+{
+	"_id" : 4,
+	"fname" : "gaurav",
+	"lname" : "mishra",
+	"email" : "gmishra@gmail.com",
+	"age" : 26,
+	"phno" : 6303685835,
+	"experience" : 6
+}
+{
+	"_id" : 5,
+	"fname" : "aish",
+	"lname" : "chapte",
+	"email" : "aishc@gmail.com",
+	"age" : 25,
+	"phno" : 9303685835,
+	"experience" : 7
+}
+{
+	"_id" : 6,
+	"fname" : "sid",
+	"lname" : "surya",
+	"email" : "sursid@gmail.com",
+	"age" : 24,
+	"phno" : 8793685835,
+	"experience" : 4
+}
+{
+	"_id" : 7,
+	"fname" : "aryan",
+	"lname" : "jain",
+	"email" : "jaina@gmail.com",
+	"age" : 22,
+	"phno" : 1233685835,
+	"experience" : 3
+}
+{
+	"_id" : 8,
+	"fname" : "arihant",
+	"lname" : "kochar",
+	"email" : "kochara@gmail.com",
+	"age" : 25,
+	"phno" : 1233685456,
+	"experience" : 2
+}
+{
+	"_id" : 9,
+	"fname" : "vivek",
+	"lname" : "kumar",
+	"email" : "vivuk@gmail.com",
+	"age" : 23,
+	"phno" : 1233105456,
+	"experience" : 3
+}
+{
+	"_id" : 10,
+	"fname" : "abhi",
+	"lname" : "kumar",
+	"email" : "abhik@gmail.com",
+	"age" : 25,
+	"phno" : 1233107766,
+	"experience" : 4
+}
+> ^C
+bye
+
