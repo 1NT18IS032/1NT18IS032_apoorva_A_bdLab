@@ -1,3 +1,7 @@
+Lab 3
+
+Date: 5th April 2021
+
 > use cust
 switched to db cust
 > db.createCollection("custd")
